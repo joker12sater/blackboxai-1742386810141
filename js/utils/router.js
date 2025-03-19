@@ -32,15 +32,23 @@ const routes = {
 
 // Show active section and hide others
 function showSection(sectionId) {
-    // First, hide all sections
+    // First, hide all sections with fade
     document.querySelectorAll('main > section').forEach(section => {
-        section.classList.add('hidden');
+        section.style.opacity = '0';
+        setTimeout(() => {
+            section.classList.add('hidden');
+        }, 300);
     });
     
-    // Show the requested section
+    // Show the requested section with fade
     const section = document.getElementById(sectionId);
     if (section) {
-        section.classList.remove('hidden');
+        setTimeout(() => {
+            section.classList.remove('hidden');
+            // Trigger reflow
+            section.offsetHeight;
+            section.style.opacity = '1';
+        }, 300);
     }
     
     // Update active navigation state
